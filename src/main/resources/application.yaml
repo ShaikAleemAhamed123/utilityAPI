@@ -7,9 +7,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      dialect: org.hibernate.dialect.MySQLDialect
+
 
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+
