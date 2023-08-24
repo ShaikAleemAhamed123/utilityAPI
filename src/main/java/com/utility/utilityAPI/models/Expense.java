@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Table;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +13,7 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
+@Table(name="expense")
 public class Expense{
 
     @Id

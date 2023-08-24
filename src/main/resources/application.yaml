@@ -1,13 +1,15 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://sql6.freesqldatabase.com/sql6642122
-    username: sql6642122
-    password: 7p1C3HZBB3
+    url: jdbc:mysql://sql6.freesqldatabase.com/sql6642141
+    username: sql6642141
+    password: LAMAmFzdNv
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.MySQLDialect
+      dialect: org.hibernate.dialect.MySQL8Dialect
 
 
 logging:
@@ -15,4 +17,6 @@ logging:
     org:
       springframework:
         security: DEBUG
+
+
 
