@@ -5,9 +5,9 @@ spring:
     password: 7p1C3HZBB3
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.MySQLDialect
 
 
 logging:
