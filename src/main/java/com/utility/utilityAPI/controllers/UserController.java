@@ -1,13 +1,10 @@
 package com.utility.utilityAPI.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utility.utilityAPI.models.Expense;
 import com.utility.utilityAPI.services.AuthService;
 import com.utility.utilityAPI.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -25,15 +22,15 @@ public class UserController {
     }
 
     @GetMapping("/debts")
-    public List<Expense> getDebts(@RequestParam String user, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
-        if(!authService.verifyToken(authorizationHeader, user)) ResponseEntity.status(401).body("User not authenticated");
-        return userService.getDebtsByTag(user,tag);
+    public ResponseEntity<?> getDebts(@RequestHeader("userHandle") String userHandle, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
+        if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
+        return ResponseEntity.status(200).body(userService.getDebtsByTag(userHandle,tag));
     }
 
     @GetMapping("/credits")
-    public ResponseEntity<?> getCredits(@RequestParam String user, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
-        if(!authService.verifyToken(authorizationHeader, user)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getCreditsByTag(user, tag));
+    public ResponseEntity<?> getCredits(@RequestHeader("userHandle") String userHandle, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
+        if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
+        return ResponseEntity.status(200).body(userService.getCreditsByTag(userHandle, tag));
     }
 
 }

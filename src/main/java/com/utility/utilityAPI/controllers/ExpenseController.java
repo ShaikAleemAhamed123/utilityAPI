@@ -23,8 +23,9 @@ public class ExpenseController {
     public ResponseEntity<?> addExpense(@RequestBody String body, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
         Expense expense=ExpenseJsonParser(body);
-        if(expense==null) return ResponseEntity.status(500).body("Difficulty adding the expense to the database !");
-        return ResponseEntity.status(200).body(expenseService.addExpense(expense));
+        if(expense==null) return ResponseEntity.status(500).body("The format of expense sent in body is not valid !");
+        if(expenseService.addExpense(expense)) return ResponseEntity.status(200).body("Expense Added Successfully !");
+        return ResponseEntity.status(500).body("Server Difficulty adding the expense to the database !");
     }
 
     public Expense ExpenseJsonParser(String data){

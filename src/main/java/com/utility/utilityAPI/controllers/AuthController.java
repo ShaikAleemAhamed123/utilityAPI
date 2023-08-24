@@ -29,19 +29,20 @@ public class AuthController {
     @PostMapping("/signIn")
     public ResponseEntity<?> signIn(@RequestBody String data)  {
         PayLoad payLoad=PayLoadJsonParser(data);
-        if(payLoad==null) return (ResponseEntity<?>) ResponseEntity.status(401).body("Please send user details in a valid format :|");
+        if(payLoad==null) return (ResponseEntity<?>) ResponseEntity.status(401).body("Please send user details in a valid format !");
         String token=authService.authenticateUser(payLoad.getUserHandle(),payLoad.getPassword());
         if(Objects.equals(token, "")) return ResponseEntity.status(401).body("Incorrect Credentials :(");
-        return ResponseEntity.ok().body(token);
+        return ResponseEntity.status(200).body(token);
     }
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody String data){
         User user=UserJsonParser(data);
+        if(user==null) return ResponseEntity.status(400).body("Invalid data format in Body :(");
         if(userService.addNewUser(user)){
             return ResponseEntity.ok("User Added Successfully");
         }
-        return ResponseEntity.status(400).body("Invalid data format in Body :(");
+        return ResponseEntity.status(400).body("Server difficulty in adding user to the database !");
     }
 
     public PayLoad PayLoadJsonParser(String data){
