@@ -2,9 +2,9 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://sql6.freemysqlhosting.net/sql6642150
-    username: sql6642150
-    password: nlGlsTP8jT
+    url: jdbc:mysql://sql6.freesqldatabase.com/sql6642195
+    username: sql6642195
+    password: BefZL34rdt
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
