@@ -6,15 +6,13 @@ import com.utility.utilityAPI.models.User;
 import com.utility.utilityAPI.services.AuthService;
 import com.utility.utilityAPI.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
 
     UserService userService;
@@ -34,6 +32,7 @@ public class AuthController {
         if(Objects.equals(token, "")) return ResponseEntity.status(401).body("Incorrect Credentials :(");
         return ResponseEntity.status(200).body(token);
     }
+
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody String data){
