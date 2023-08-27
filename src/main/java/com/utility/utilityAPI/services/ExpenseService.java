@@ -4,6 +4,8 @@ import com.utility.utilityAPI.models.Expense;
 import com.utility.utilityAPI.repositories.ExpenseRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpenseService {
 
@@ -18,4 +20,7 @@ public class ExpenseService {
     }
 
 
+    public List<Expense> getAllExpenses() {
+        return expenseRepo.findAll();
+    }
 }

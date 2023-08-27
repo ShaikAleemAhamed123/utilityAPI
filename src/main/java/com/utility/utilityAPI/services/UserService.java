@@ -4,8 +4,6 @@ import com.utility.utilityAPI.models.Expense;
 import com.utility.utilityAPI.models.User;
 import com.utility.utilityAPI.repositories.ExpenseRepo;
 import com.utility.utilityAPI.repositories.UserRepo;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +29,6 @@ public class UserService {
             return false;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
-        user.setRole("ROLE_USER");
         User createdUser=userRepo.save(user);
         return true;
     }

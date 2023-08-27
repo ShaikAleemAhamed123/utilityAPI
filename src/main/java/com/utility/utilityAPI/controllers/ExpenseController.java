@@ -19,24 +19,17 @@ public class ExpenseController {
         this.expenseService=expenseService;
         this.authService=authService;
     }
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllExpenses(){
+        return ResponseEntity.ok().body(expenseService.getAllExpenses());
+    }
     @PostMapping("/addExpense")
-    public ResponseEntity<?> addExpense(@RequestBody String body, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+    public ResponseEntity<?> addExpense(@RequestBody Expense expense, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        Expense expense=ExpenseJsonParser(body);
         if(expense==null) return ResponseEntity.status(500).body("The format of expense sent in body is not valid !");
-        if(expenseService.addExpense(expense)) return ResponseEntity.status(200).body("Expense Added Successfully !");
+        if(expenseService.addExpense(expense)) return ResponseEntity.status(201).body("Expense Added Successfully !");
         return ResponseEntity.status(500).body("Server Difficulty adding the expense to the database !");
     }
 
-    public Expense ExpenseJsonParser(String data){
-        ObjectMapper objectMapper=new ObjectMapper();
-        try{
-            return objectMapper.readValue(data,Expense.class);
-        }
-        catch(Exception e){
-            System.out.println("Exception while parsing json user data : "+ e.getMessage());
-        }
-        return null;
-    }
 
 }

@@ -1,6 +1,5 @@
 package com.utility.utilityAPI.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utility.utilityAPI.services.AuthService;
 import com.utility.utilityAPI.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +12,9 @@ public class UserController {
 
     UserService userService;
     AuthService authService;
-    ObjectMapper objectMapper;
 
-    public UserController(UserService userService, ObjectMapper objectMapper, AuthService authService){
+    public UserController(UserService userService, AuthService authService){
         this.userService = userService;
-        this.objectMapper=objectMapper;
         this.authService=authService;
     }
 

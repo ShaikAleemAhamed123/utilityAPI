@@ -16,10 +16,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(name="user")
 public class User {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String userName;
+    @Id
     private String userHandle;
     private String password;
     private int roomNo;
