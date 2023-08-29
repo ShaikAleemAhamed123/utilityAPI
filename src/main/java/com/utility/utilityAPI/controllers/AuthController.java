@@ -1,8 +1,7 @@
 package com.utility.utilityAPI.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utility.utilityAPI.models.PayLoad;
-import com.utility.utilityAPI.models.User;
+import com.utility.utilityAPI.models.UserData;
 import com.utility.utilityAPI.services.AuthService;
 import com.utility.utilityAPI.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +31,9 @@ public class AuthController {
 
 
     @PostMapping("/signUp")
-    public ResponseEntity<?> signUp(@RequestBody User user){
-        if(user==null) return ResponseEntity.status(400).body("Invalid data format in Body :(");
-        if(userService.addNewUser(user)){
+    public ResponseEntity<?> signUp(@RequestBody UserData userData){
+        if(userData ==null) return ResponseEntity.status(400).body("Invalid data format in Body :(");
+        if(userService.addNewUser(userData)){
             return ResponseEntity.status(201).body("User Added Successfully");
         }
         return ResponseEntity.status(400).body("Server difficulty in adding user to the database !");

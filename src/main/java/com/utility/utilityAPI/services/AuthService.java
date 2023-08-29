@@ -1,7 +1,7 @@
 package com.utility.utilityAPI.services;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.utility.utilityAPI.models.User;
+import com.utility.utilityAPI.models.UserData;
 import com.utility.utilityAPI.repositories.UserRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,10 @@ public class AuthService {
     }
 
     public String authenticateUser(String userName, String password){
-        User retrieved_user = userRepo.findByUserHandle(userName);
-        if(retrieved_user==null) return "";
+        UserData retrieved_App_userData = userRepo.findByUserHandle(userName);
+        if(retrieved_App_userData ==null) return "";
         try {
-            if(passwordEncoder.matches(password,retrieved_user.getPassword())){
+            if(passwordEncoder.matches(password, retrieved_App_userData.getPassword())){
                 String token = jwtGenerator.generateToken(userName);
                 System.out.println("From the authenticate user method in the user service class :: Token : "+token);
                 return token;

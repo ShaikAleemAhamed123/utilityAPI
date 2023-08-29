@@ -2,14 +2,14 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://sql6.freesqldatabase.com/sql6642195
-    username: sql6642195
-    password: BefZL34rdt
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:sqlserver://utility-dev-database.database.windows.net:1433;database=utility_dev;user=aleem@utility-dev-database;password=UtilityDB@azure;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+#    username: sql6642195
+#    password: BefZL34rdt
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL8Dialect
+      dialect: org.hibernate.dialect.SQLServerDialect
 
 
 logging:

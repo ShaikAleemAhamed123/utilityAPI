@@ -1,7 +1,7 @@
 package com.utility.utilityAPI.services;
 
+import com.utility.utilityAPI.models.UserData;
 import com.utility.utilityAPI.models.Expense;
-import com.utility.utilityAPI.models.User;
 import com.utility.utilityAPI.repositories.ExpenseRepo;
 import com.utility.utilityAPI.repositories.UserRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,12 +24,12 @@ public class UserService {
         this.passwordEncoder=passwordEncoder;
     }
 
-    public boolean addNewUser(User user){
-        if(userRepo.findByUserHandle(user.getUserHandle())!=null){
+    public boolean addNewUser(UserData userData){
+        if(userRepo.findByUserHandle(userData.getUserHandle())!=null){
             return false;
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User createdUser=userRepo.save(user);
+        userData.setPassword(passwordEncoder.encode(userData.getPassword()));
+        UserData createdUserData =userRepo.save(userData);
         return true;
     }
 
@@ -44,8 +44,8 @@ public class UserService {
     }
 
     public boolean verifyToken(String jwtToken, String userName) {
-        User user=userRepo.findByUserHandle(userName);
-        if(user==null) return false;
+        UserData userData =userRepo.findByUserHandle(userName);
+        if(userData ==null) return false;
         return JwtVerifier.verifyToken(jwtToken, userName);
     }
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.relational.core.mapping.Table;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Setter
 @ToString
 @Entity
-@Table(name="user")
-public class User {
+public class UserData {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
