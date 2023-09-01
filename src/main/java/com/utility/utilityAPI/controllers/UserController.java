@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @PostMapping("/pending")
-    public ResponseEntity<?> updateTxnToPending(@RequestBody int id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+    public ResponseEntity<?> updateTxnToPending(@RequestBody Long id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        if(userService.updateTxnToPending(id)){
+        if(userService.updateTxnToPending(id, userHandle)){
             return ResponseEntity.status(200).body("Transaction moved to pending !");
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to pending !");
@@ -45,9 +45,9 @@ public class UserController {
     }
 
     @PostMapping("/paid")
-    public ResponseEntity<?> updateTxnToPaid(@RequestBody int id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+    public ResponseEntity<?> updateTxnToPaid(@RequestBody Long id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        if(userService.updateTxnToPaid(id)){
+        if(userService.updateTxnToPaid(id, userHandle)){
             return ResponseEntity.status(200).body("Transaction moved to paid !");
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to paid !");

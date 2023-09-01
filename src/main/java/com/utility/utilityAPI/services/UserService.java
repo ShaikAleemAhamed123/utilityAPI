@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class UserService {
@@ -49,15 +51,19 @@ public class UserService {
         return JwtVerifier.verifyToken(jwtToken, userName);
     }
 
-    public boolean updateTxnToPending(int id) {
-        try{
+    public boolean updateTxnToPending(Long id, String userHandle) {
+        Optional<Expense> e=expenseRepo.findById(id);
+        if(e.isEmpty()) return false;
+        final boolean[] flag = {false};
+        e.ifPresent(expense -> {
+            String  payer = expense.getPayer();
+            flag[0] = Objects.equals(payer, userHandle);
+        });
+        if(flag[0]){
             userRepo.updateTxnToPending(id);
             return true;
         }
-        catch(Exception e){
-            System.out.println("Exception while updating the txn to pending with Exception :: "+e);
-            return false;
-        }
+        return false;
 
     }
 
@@ -65,15 +71,19 @@ public class UserService {
         return userRepo.findPendingTxns(userHandle);
     }
 
-    public boolean updateTxnToPaid(int id) {
-        try{
+    public boolean updateTxnToPaid(Long id, String userHandle) {
+        Optional<Expense> e=expenseRepo.findById(id);
+        if(e.isEmpty()) return false;
+        final boolean[] flag = {false};
+        e.ifPresent(expense -> {
+            String  payee = expense.getPayee();
+            flag[0] = Objects.equals(payee, userHandle);
+        });
+        if(flag[0]){
             userRepo.updateTxnToPaid(id);
             return true;
         }
-        catch(Exception e){
-            System.out.println("Exception while updating the txn to paid with Exception :: "+e);
-            return false;
-        }
+        return false;
     }
 
     public List<Expense> getPaidTxns(String userHandle) {

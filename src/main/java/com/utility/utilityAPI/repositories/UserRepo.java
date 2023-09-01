@@ -17,7 +17,7 @@ public interface UserRepo extends JpaRepository<UserData, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Expense e set e.status = 1 where e.id = :id")
-    void updateTxnToPending(int id);
+    void updateTxnToPending(Long id);
 
     @Query("SELECT e FROM Expense e WHERE e.status = 1 AND (e.payee = :userHandle OR e.payer = :userHandle)")
     List<Expense> findPendingTxns(String userHandle);
@@ -25,7 +25,7 @@ public interface UserRepo extends JpaRepository<UserData, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Expense e set e.status = 2 where e.id = :id")
-    void updateTxnToPaid(int id);
+    void updateTxnToPaid(Long id);
 
     @Query("SELECT e FROM Expense e WHERE e.status = 2 AND e.payer = :userHandle")
     List<Expense> findPaidTxns(String userHandle);
