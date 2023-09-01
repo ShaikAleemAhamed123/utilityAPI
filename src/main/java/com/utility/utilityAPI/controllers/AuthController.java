@@ -32,7 +32,7 @@ public class AuthController {
 
     @PostMapping("/signUp")
     public ResponseEntity<?> signUp(@RequestBody UserData userData){
-        if(userData ==null) return ResponseEntity.status(400).body("Invalid data format in Body :(");
+        if(userData == null) return ResponseEntity.status(400).body("Invalid data format in Body :(");
         if(userService.addNewUser(userData)){
             return ResponseEntity.status(201).body("User Added Successfully");
         }

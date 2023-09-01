@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -22,6 +23,8 @@ public class Expense{
     private String payer;
     private String payee;
     private double amount;
+    @Column(columnDefinition = "String default 'Unspecified' ")
     private String tag;
+    @Column(columnDefinition = "int default 1")
     private int status;
 }
