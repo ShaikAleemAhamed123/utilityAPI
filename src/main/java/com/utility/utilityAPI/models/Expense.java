@@ -23,4 +23,5 @@ public class Expense{
     private String payee;
     private double amount;
     private String tag;
+    private int status;
 }

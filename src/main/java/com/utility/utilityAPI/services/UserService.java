@@ -48,4 +48,39 @@ public class UserService {
         if(userData ==null) return false;
         return JwtVerifier.verifyToken(jwtToken, userName);
     }
+
+    public boolean updateTxnToPending(int id) {
+        try{
+            userRepo.updateTxnToPending(id);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("Exception while updating the txn to pending with Exception :: "+e);
+            return false;
+        }
+
+    }
+
+    public List<Expense> getPendingTxns(String userHandle) {
+        return userRepo.findPendingTxns(userHandle);
+    }
+
+    public boolean updateTxnToPaid(int id) {
+        try{
+            userRepo.updateTxnToPaid(id);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("Exception while updating the txn to paid with Exception :: "+e);
+            return false;
+        }
+    }
+
+    public List<Expense> getPaidTxns(String userHandle) {
+        return userRepo.findPaidTxns(userHandle);
+    }
+
+    public List<Expense> getReceivedTxns(String userHandle) {
+        return userRepo.findReceivedTxns(userHandle);
+    }
 }
