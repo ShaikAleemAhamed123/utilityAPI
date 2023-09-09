@@ -23,7 +23,7 @@ public class Expense{
     private String payer;
     private String payee;
     private double amount;
-    @Column(columnDefinition = "String default 'Unspecified' ")
+    @Column(columnDefinition = "varchar(255) default 'Unspecified' ")
     private String tag;
     @Column(columnDefinition = "int default 1")
     private int status;

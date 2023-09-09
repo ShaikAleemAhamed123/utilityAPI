@@ -8,6 +8,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
+      show_sql: true
+      use_sql_comments: true
       ddl-auto: update
       dialect: org.hibernate.dialect.MySQLDialect
 

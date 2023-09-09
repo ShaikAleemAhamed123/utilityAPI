@@ -19,8 +19,8 @@ public class UserData {
     private String password;
     @Column(columnDefinition = "int default 0")
     private int roomNo;
-    @Column(columnDefinition = "String default 1")
+    @Column(columnDefinition = "int default 1")
     private int enabled;
-    @Column(columnDefinition = "String default 'ROLE_USER'")
+    @Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
     private String role;
 }
