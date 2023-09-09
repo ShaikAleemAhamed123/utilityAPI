@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
       - name: Build Spring Boot application
         run:  mvn clean package  # Adjust the build command as needed
       - name: Build the Docker image
