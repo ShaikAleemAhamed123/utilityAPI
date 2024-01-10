@@ -38,16 +38,22 @@ public class UserController {
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to pending !");
     }
-    @GetMapping("/pending")
-    public ResponseEntity<?> getPtxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+    @GetMapping("/pendingCredits")
+    public ResponseEntity<?> getPendingCreditTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-       return ResponseEntity.status(200).body(userService.getPendingTxns(userHandle));
+       return ResponseEntity.status(200).body(userService.getPendingCreditTxns(userHandle));
+    }
+
+    @GetMapping("/pendingDebits")
+    public ResponseEntity<?> getPendingDebitTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+        if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
+        return ResponseEntity.status(200).body(userService.getPendingDebitTxns(userHandle));
     }
 
     @PostMapping("/paid")
-    public ResponseEntity<?> updateTxnToPaid(@RequestBody Long id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+    public ResponseEntity<?> updateTxnToPaid(@RequestParam Long txnId, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        if(userService.updateTxnToPaid(id, userHandle)){
+        if(userService.updateTxnToPaid(txnId, userHandle)){
             return ResponseEntity.status(200).body("Transaction moved to paid !");
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to paid !");

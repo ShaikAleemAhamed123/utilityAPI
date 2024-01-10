@@ -10,4 +10,5 @@ import lombok.*;
 public class PayLoad {
     String userHandle;
     String password;
+
 }

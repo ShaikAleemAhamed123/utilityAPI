@@ -32,4 +32,10 @@ public interface UserRepo extends JpaRepository<UserData, Long> {
 
     @Query("SELECT e FROM Expense e WHERE e.status = 2 AND e.payee = :userHandle")
     List<Expense> findReceivedTxns(String userHandle);
+
+    @Query("SELECT e FROM Expense e WHERE e.status = 1 AND e.payee = :userHandle")
+    List<Expense> getPendingCreditTxns(String userHandle);
+
+    @Query("SELECT e FROM Expense e WHERE e.status = 1 AND e.payer = :userHandle")
+    List<Expense> getPendingDebitTxns(String userHandle);
 }

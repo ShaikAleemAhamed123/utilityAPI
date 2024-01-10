@@ -2,6 +2,8 @@ package com.utility.utilityAPI.services;
 
 import com.utility.utilityAPI.models.Expense;
 import com.utility.utilityAPI.repositories.ExpenseRepo;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,5 +24,10 @@ public class ExpenseService {
 
     public List<Expense> getAllExpenses() {
         return expenseRepo.findAll();
+    }
+
+    public boolean payExpense(int txnId) {
+        expenseRepo.payExpense(txnId);
+        return true;
     }
 }

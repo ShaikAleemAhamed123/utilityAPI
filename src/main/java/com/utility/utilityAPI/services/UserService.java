@@ -93,4 +93,12 @@ public class UserService {
     public List<Expense> getReceivedTxns(String userHandle) {
         return userRepo.findReceivedTxns(userHandle);
     }
+
+    public List<Expense> getPendingDebitTxns(String userHandle) {
+        return userRepo.getPendingDebitTxns(userHandle);
+    }
+
+    public List<Expense> getPendingCreditTxns(String userHandle) {
+        return userRepo.getPendingCreditTxns(userHandle);
+    }
 }

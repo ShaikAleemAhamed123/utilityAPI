@@ -30,6 +30,12 @@ public class ExpenseController {
         if(expenseService.addExpense(expense)) return ResponseEntity.status(201).body("Expense Added Successfully !");
         return ResponseEntity.status(500).body("Server Difficulty adding the expense to the database !");
     }
+    @PostMapping("/payExpense")
+    public ResponseEntity<?> payExpense(@RequestParam int txnId, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
+        if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
+        if(expenseService.payExpense(txnId)) return ResponseEntity.status(200).body("Expense Paid successfully !");
+        return ResponseEntity.status(500).body("Server Difficulty adding the expense to the database !");
+    }
 
 
 }

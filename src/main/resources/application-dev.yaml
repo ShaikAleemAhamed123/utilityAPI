@@ -2,16 +2,16 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://localhost:3306/utility_dev
+    url: jdbc:mariadb://127.0.0.1:3306/utility_dev
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
       show_sql: true
       use_sql_comments: true
       ddl-auto: update
-      dialect: org.hibernate.dialect.MySQLDialect
+      dialect: org.hibernate.dialect.MariaDB103Dialect
 
 logging:
   level:
