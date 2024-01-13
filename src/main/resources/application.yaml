@@ -1,15 +1,38 @@
+##Database on Azure
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  datasource:
+#    url: jdbc:sqlserver://utility-dev-database.database.windows.net:1433;database=utility_dev;user=aleem@utility-dev-database;password=UtilityDB@azure;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+##    username: sql6642195
+##    password: BefZL34rdt
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.SQLServerDialect
+#
+#
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
+
+
+#Postgresql Database on Render
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:sqlserver://utility-dev-database.database.windows.net:1433;database=utility_dev;user=aleem@utility-dev-database;password=UtilityDB@azure;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-#    username: sql6642195
-#    password: BefZL34rdt
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:postgresql://dpg-cmh334f109ks739alul0-a.singapore-postgres.render.com/utility_prod
+    username: utility_prod_user
+    password: 5lccFVskkAJ6gkFdSuaDp0CoCalmj3tA
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.SQLServerDialect
+      dialect: org.hibernate.dialect.PostgreSQL94Dialect
 
 
 logging:
