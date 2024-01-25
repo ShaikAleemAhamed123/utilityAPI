@@ -41,7 +41,12 @@ public class AuthService {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7); // Remove "Bearer " prefix
             System.out.println("Token extracted successfully ! + token : "+token);
-            return userService.verifyToken(token, userName);
+            boolean userAvailable = userService.userAvailable(userName);
+            if(!userAvailable){
+                System.out.println("User not registered !");
+                return false;
+            }
+            return JwtVerifier.verifyToken(token, userName);
         }
         System.out.println("No token found !");
         return false; // No token found

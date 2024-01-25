@@ -1,39 +1,39 @@
 package com.utility.utilityAPI.controllers;
 
 import com.utility.utilityAPI.services.AuthService;
-import com.utility.utilityAPI.services.UserService;
+import com.utility.utilityAPI.services.ledgerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/ledger")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class UserController {
+public class ledgerController {
 
-    UserService userService;
     AuthService authService;
+    ledgerService ledgerService;
 
-    public UserController(UserService userService, AuthService authService){
-        this.userService = userService;
+    public ledgerController( AuthService authService, ledgerService ledgerService){
         this.authService=authService;
+        this.ledgerService = ledgerService;
     }
 
     @GetMapping("/debts")
     public ResponseEntity<?> getDebts(@RequestHeader("userHandle") String userHandle, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getDebtsByTag(userHandle,tag));
+        return ResponseEntity.status(200).body(ledgerService.getDebtsByTag(userHandle,tag));
     }
 
     @GetMapping("/credits")
     public ResponseEntity<?> getCredits(@RequestHeader("userHandle") String userHandle, @RequestParam(defaultValue = "") String tag, @RequestHeader("Authorization") String authorizationHeader){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getCreditsByTag(userHandle, tag));
+        return ResponseEntity.status(200).body(ledgerService.getCreditsByTag(userHandle, tag));
     }
 
-    @PostMapping("/pending")
+    @PostMapping("/toPending")
     public ResponseEntity<?> updateTxnToPending(@RequestBody Long id, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        if(userService.updateTxnToPending(id, userHandle)){
+        if(ledgerService.updateTxnToPending(id, userHandle)){
             return ResponseEntity.status(200).body("Transaction moved to pending !");
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to pending !");
@@ -41,19 +41,19 @@ public class UserController {
     @GetMapping("/pendingCredits")
     public ResponseEntity<?> getPendingCreditTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-       return ResponseEntity.status(200).body(userService.getPendingCreditTxns(userHandle));
+       return ResponseEntity.status(200).body(ledgerService.getPendingCreditTxns(userHandle));
     }
 
     @GetMapping("/pendingDebits")
     public ResponseEntity<?> getPendingDebitTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getPendingDebitTxns(userHandle));
+        return ResponseEntity.status(200).body(ledgerService.getPendingDebitTxns(userHandle));
     }
 
-    @PostMapping("/paid")
+    @PostMapping("/pay")
     public ResponseEntity<?> updateTxnToPaid(@RequestParam Long txnId, @RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        if(userService.updateTxnToPaid(txnId, userHandle)){
+        if(ledgerService.updateTxnToPaid(txnId, userHandle)){
             return ResponseEntity.status(200).body("Transaction moved to paid !");
         }
         return ResponseEntity.status(422).body("Failed to update the transaction to paid !");
@@ -61,12 +61,12 @@ public class UserController {
     @GetMapping("/paid")
     public ResponseEntity<?> getPaidTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getPaidTxns(userHandle));
+        return ResponseEntity.status(200).body(ledgerService.getPaidTxns(userHandle));
     }
     @GetMapping("/received")
     public ResponseEntity<?> getReceivedTxns(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("userHandle") String userHandle){
         if(!authService.verifyToken(authorizationHeader, userHandle)) return ResponseEntity.status(401).body("User not authenticated");
-        return ResponseEntity.status(200).body(userService.getReceivedTxns(userHandle));
+        return ResponseEntity.status(200).body(ledgerService.getReceivedTxns(userHandle));
     }
 
 }
