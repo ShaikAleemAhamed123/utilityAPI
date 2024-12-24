@@ -1,13 +1,14 @@
 package com.utility.utilityAPI.services;
 
+import java.util.Objects;
+
+import org.springframework.stereotype.Service;
+
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.stereotype.Service;
-
-import java.util.Objects;
+import com.auth0.jwt.interfaces.JWTVerifier;
 
 @Service
 public class JwtVerifier {
@@ -19,7 +20,7 @@ public class JwtVerifier {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
 
-            String payLoadUserName= jwt.getSubject();
+            String payLoadUserName = jwt.getSubject();
 
             System.out.println("Token verified. Subject: " + jwt.getSubject());
             System.out.println("Issued At: " + jwt.getIssuedAt());

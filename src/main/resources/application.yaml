@@ -25,21 +25,28 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:postgresql://dpg-cmh334f109ks739alul0-a.singapore-postgres.render.com/utility_prod
-    username: utility_prod_user
-    password: 5lccFVskkAJ6gkFdSuaDp0CoCalmj3tA
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://google/utilitymasterdata?cloudSqlInstance=utilityapii:asia-south1:utilitydata&socketFactory=com.google.cloud.sql.postgres.SocketFactory
+    username: utilitydata
+    password: utilitydata@gcp
+    continue-on-error: true
+    initialization-mode: always
+    database: org.postgresql.Driver
+  cloud:
+    gcp:
+      project-id: utilityAPI
+      credentials:
+        location: file:src/main/resources/utilityapii-a82dae0669b0.json
   jpa:
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.PostgreSQL94Dialect
-
 
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+
 
 
 
