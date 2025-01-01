@@ -30,12 +30,7 @@ spring:
     password: utility_data_user
     continue-on-error: true
     initialization-mode: always
-    database: org.postgresql.Driver
-  # cloud:
-  #   gcp:
-  #     project-id: utilityAPI
-  #     credentials:
-  #       location: file:src/main/resources/utilityapii-a82dae0669b0.json
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
