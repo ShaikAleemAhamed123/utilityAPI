@@ -25,23 +25,21 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc://postgresql://utility_data_user:980Fjs5PiG2v8RH5RrOI6XSBsJGbktjA@dpg-ctqns3ggph6c73clr5f0-a.oregon-postgres.render.com/utility_data
-    username: utility_data
-    password: utility_data_user
+    url: jdbc:postgresql://dpg-ctqns3ggph6c73clr5f0-a.oregon-postgres.render.com/utility_data
+    username: utility_data_user
+    password: 980Fjs5PiG2v8RH5RrOI6XSBsJGbktjA
+    driver-class-name: org.postgresql.Driver
     continue-on-error: true
     initialization-mode: always
-    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQL94Dialect
-
+      ddl-auto: update # Use `validate` or migration tools for production
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
 logging:
   level:
     org:
       springframework:
-        security: DEBUG
-
+        security: DEBUG # Use `INFO` or higher for production
 
 
 
